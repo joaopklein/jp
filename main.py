@@ -4,13 +4,16 @@ import os
 import plotly.express as px
 
 
-# Função para processar o CSV
 def process_csv(file_path):
     df = pd.read_csv(file_path)
+    
+    # Verifique e exiba as colunas do arquivo
+    st.write("Colunas do CSV:", df.columns)
+
     df['Data/Hora'] = pd.to_datetime(df['Data/Hora'])
     df['Consumo em kWh'] = pd.to_numeric(df['Consumo em kWh'], errors='coerce')
     df['Custo Total'] = pd.to_numeric(df['Custo Total'], errors='coerce')
-
+    
     # Criar uma coluna de data sem a hora
     df['Data'] = df['Data/Hora'].dt.date
     return df
